@@ -1,7 +1,8 @@
 import { Button, VerticalBox } from "std-widgets.slint";
-import {task} from "./task.slint";
+import {taskAddition} from "./taskAddition.slint";
 export component AppWindow inherits Window {
     in-out property <int> counter: 42;
+    in-out property <string> myTask: "here";
     callback request-increase-value();
     VerticalBox {
         Text {
@@ -15,6 +16,17 @@ export component AppWindow inherits Window {
             }
         }
 
-        task { }
+        taskAddition {
+            addedTask(task_name) => {
+                // Update myTask property with the new task name
+            root.myTask = task_name;
+            }
+        }
+
+        // PRINT TASK NAME
+        // Display the task name
+        Text {
+            text: "Task Name: \{root.myTask}";
+        }
     }
 }
