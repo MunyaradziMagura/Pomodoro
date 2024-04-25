@@ -34,37 +34,44 @@ ui.set_collected_tasks(the_model_rc);
 
     // code to handle the timer
     let mut timer = Timer::default();
+    // these varibles will store the time values
     let mut seconds = 0;
     let mut minutes = 0;
     let mut hours = 0;
 
-    timer.start(TimerMode::Repeated, std::time::Duration::from_millis(1000), move || {
+        
+    
 
+    // ui.on_stop_timer(move ||{
+    //     timer.stop();
+    //     println!("Stopped");
 
-        seconds += 1;
-        if (seconds >= 60){
-            minutes += 1;
-            seconds = 0;
+    // });
+    ui.on_timer_state(move |state| {
+        if(state==true){
+            timer.start(TimerMode::Repeated, std::time::Duration::from_millis(1000), move || {                
+                seconds += 1;
+                if (seconds >= 60){
+                    minutes += 1;
+                    seconds = 0;
+                }
+                if (minutes >= 60){
+                    hours += 1;
+                    minutes = 0;
+                } 
+                if (hours >= 60){
+                    seconds = 0;
+                    minutes = 0;
+                    hours = 0;
+                } 
+        
+                println!("Hours: {}, Minutes: {}, Seconds: {}", hours, minutes, seconds);
+                
+                });
+        }else{
+            timer.stop()
         }
-        if (minutes >= 60){
-            hours += 1;
-            minutes = 0;
-        } 
-        if (hours >= 60){
-            seconds = 0;
-            minutes = 0;
-            hours = 0;
-        } 
-
-
-        println!("Hours: {}, Minutes: {}, Seconds: {}", hours, minutes, seconds);
-
-    });
-
-    ui.on_stop_timer(move ||{
-        timer.stop();
-        println!("Stopped");
-
+        
     });
     ui.run()
 }

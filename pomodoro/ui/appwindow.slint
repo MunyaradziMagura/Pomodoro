@@ -12,7 +12,7 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
     callback request-increase-value();
     callback current-task(string);
     callback remove-task(int);
-    callback stop-timer();
+    callback timer-state(bool);
     GridLayout {
         spacing: 0.2rem;
         Row {
@@ -28,8 +28,10 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
                         Rectangle {
                             background: red;
                             Button {
+                                checkable: true;
+                                text: self.checked ? "ON" : "OFF";
                                 clicked => {
-                                    stop-timer()
+                                    self.checked ? timer-state(true) : timer-state(false);
                                 }
                             }
                         }
@@ -40,10 +42,10 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
                         alignment: stretch;
                         vertical-stretch: 9;
                         Rectangle {
-                            background: (time.has-focus) ? blue : red;
-                            time := LineEdit {
-                                font-size: 20rem;
-                                placeholder-text: "20:15";
+                            time := Text {
+                                width: 90%;
+                                font-size: 15rem;
+                                text: "20:15";
                             }
                         }
                     }
