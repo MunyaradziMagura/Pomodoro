@@ -13,11 +13,9 @@ fn main() -> Result<(), slint::PlatformError> {
     //         ui.set_counter(ui.get_counter() + 1);
     //     }
     // });
-    ui.current_task(move |string|{
-        let ui = ui_handle.unwrap();
-        let parsed = string.trim().unwrap();
-        let task_list = get_collected_tasks();
-        println!(task_list);
+    ui.on_current_task(move |string|{
+        let parsed = string.trim();
+        println!("{}", parsed);
         
     });
     ui.run()

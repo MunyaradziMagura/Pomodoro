@@ -18,16 +18,7 @@ export component AppWindow inherits Window {
         }
 
         VerticalBox {
-            ListView {
-                for data in root.collected-tasks: Rectangle {
-                    height: 55px;
-                    width: 100%;
-                    Text {
-                        x: 0;
-                        text: data.text;
-                    }
-                }
-            }
+            ListView { }
         }
     }
 }
