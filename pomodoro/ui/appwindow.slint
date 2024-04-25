@@ -12,6 +12,7 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
     callback request-increase-value();
     callback current-task(string);
     callback remove-task(int);
+    callback stop-timer();
     GridLayout {
         spacing: 0.2rem;
         Row {
@@ -20,19 +21,26 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
                 background: red;
                 min-width: (root.width / 3) * 2;
                 VerticalLayout {
+                    // THIS IS THE CODE FOR THE BUTTONS OF THE CLOCK
                     HorizontalLayout {
                         vertical-stretch: 2;
                         alignment: stretch;
                         Rectangle {
                             background: red;
+                            Button {
+                                clicked => {
+                                    stop-timer()
+                                }
+                            }
                         }
                     }
 
+                    // THIS IS THE CODE FOR THE CLOCK
                     HorizontalLayout {
                         alignment: stretch;
                         vertical-stretch: 9;
                         Rectangle {
-                            background: green;
+                            background: (time.has-focus) ? blue : red;
                             time := LineEdit {
                                 font-size: 20rem;
                                 placeholder-text: "20:15";
@@ -40,6 +48,7 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
                         }
                     }
 
+                    // THIS IS THE CODE FOR BOTTOM OF THE SCREEN
                     HorizontalLayout {
                         alignment: stretch;
                         vertical-stretch: 1;

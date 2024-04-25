@@ -1,6 +1,6 @@
-use std::{rc::Rc};
+use std::{rc::Rc, time::Duration};
 
-use slint::{ModelRc, VecModel};
+use slint::{ModelRc, Timer, TimerMode, VecModel};
 
 slint::include_modules!();
 
@@ -29,6 +29,42 @@ ui.set_collected_tasks(the_model_rc);
     });
     ui.on_remove_task(move |idx| {
         cloned_model_for_remove.remove(idx.try_into().unwrap());
+    });
+
+
+    // code to handle the timer
+    let mut timer = Timer::default();
+    let mut seconds = 0;
+    let mut minutes = 0;
+    let mut hours = 0;
+
+    timer.start(TimerMode::Repeated, std::time::Duration::from_millis(1000), move || {
+
+
+        seconds += 1;
+        if (seconds >= 60){
+            minutes += 1;
+            seconds = 0;
+        }
+        if (minutes >= 60){
+            hours += 1;
+            minutes = 0;
+        } 
+        if (hours >= 60){
+            seconds = 0;
+            minutes = 0;
+            hours = 0;
+        } 
+
+
+        println!("Hours: {}, Minutes: {}, Seconds: {}", hours, minutes, seconds);
+
+    });
+
+    ui.on_stop_timer(move ||{
+        timer.stop();
+        println!("Stopped");
+
     });
     ui.run()
 }
