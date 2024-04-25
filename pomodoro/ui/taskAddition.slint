@@ -2,21 +2,18 @@ import { Button, VerticalBox, HorizontalBox, LineEdit } from "std-widgets.slint"
 import {subTask} from "./subTask.slint";
 
 export component taskAddition inherits Rectangle {
-    min-width: 500px;
+    height: 15%;
     // Define addedTask callback property
     callback addedTask(string);
-    VerticalBox {
-        HorizontalBox {
-            height: 25%;
-            myTask := LineEdit {
-                placeholder-text: "Add a Task Heading";
-            }
+    HorizontalBox {
+        myTask := LineEdit {
+            placeholder-text: "Add a Task Heading";
+        }
 
-            Button {
-                text: "ADD";
-                clicked => {
-                    root.addedTask(myTask.text);
-                }
+        Button {
+            text: "ADD";
+            clicked => {
+                root.addedTask(myTask.text);
             }
         }
     }

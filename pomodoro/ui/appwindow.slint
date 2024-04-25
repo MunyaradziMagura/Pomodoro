@@ -1,27 +1,32 @@
-import { Button, VerticalBox } from "std-widgets.slint";
+import { Button, VerticalBox, ListView, HorizontalBox } from "std-widgets.slint";
 import {taskAddition} from "./taskAddition.slint";
 import {subTask} from "./subTask.slint";
+import {taskVisualiser} from "./TaskVisualiser.slint";
 export component AppWindow inherits Window {
-    in-out property <int> counter: 42;
     in-out property <string> myTask: "here";
+    in-out property <[{text: string}]> collected-tasks:[{ text: "working on rust" }, { text: "doing some home work" }];
     callback request-increase-value();
-    callback currentTask(string);
+    callback current-task(string);
     VerticalBox {
-        Text {
-            text: "Counter: \{root.counter}";
-        }
-
-        Button {
-            text: "Increase value";
-            clicked => {
-                root.request-increase-value();
+        VerticalBox {
+            taskAddition {
+                addedTask(task_name) => {
+                    // Update myTask property with the new task name
+                current-task(task_name);
+                }
             }
         }
 
-        taskAddition {
-            addedTask(task_name) => {
-                // Update myTask property with the new task name
-                currentTask(task_name);
+        VerticalBox {
+            ListView {
+                for data in root.collected-tasks: Rectangle {
+                    height: 55px;
+                    width: 100%;
+                    Text {
+                        x: 0;
+                        text: data.text;
+                    }
+                }
             }
         }
     }
