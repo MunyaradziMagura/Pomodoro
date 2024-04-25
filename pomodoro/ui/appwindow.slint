@@ -3,7 +3,7 @@ import {taskAddition} from "./taskAddition.slint";
 import {subTask} from "./subTask.slint";
 import {taskVisualiser} from "./TaskVisualiser.slint";
 export component AppWindow inherits Window {
-    min-width: 800px;
+    min-width: 1000px;
     min-height: 500px;
     in-out property <string> myTask: "here";
     in-out property <int> counter: 0;
@@ -23,7 +23,7 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
 
             Rectangle {
                 background: blue;
-                min-width: (root.width / 3) + 30px;
+                min-width: (root.width / 3);
                 // CODE FOR THE TASK
         VerticalBox {
                     VerticalBox {
