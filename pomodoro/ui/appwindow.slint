@@ -6,34 +6,57 @@ export component AppWindow inherits Window {
     min-width: 800px;
     min-height: 500px;
     in-out property <string> myTask: "here";
+    in-out property <int> counter: 0;
     //    in-out property <[{text: string}]> collected-tasks:[{ text: "working on rust" }, { text: "doing some home work" }];
 in-out property <[string]> collected-tasks:["working on rust", "doing some home work"];
     callback request-increase-value();
     callback current-task(string);
-    VerticalBox {
-        VerticalBox {
-            taskAddition {
-                addedTask(task_name) => {
-                    // Update myTask property with the new task name
-                current-task(task_name);
-                }
+    callback remove-task(int);
+    // CODE FOR THE PONODORO
+    GridLayout {
+        spacing: 1rem;
+        Row {
+            Rectangle {
+                background: red;
+                min-width: (root.width / 3) * 2;
             }
-        }
 
+            Rectangle {
+                background: blue;
+                min-width: (root.width / 3) + 30px;
+                // CODE FOR THE TASK
         VerticalBox {
-            ListView {
-                for task in collected-tasks: Rectangle {
-                    background: gray;
-                    HorizontalLayout {
-                        padding-bottom: 1rem;
-                        HorizontalBox {
-                            LineEdit {
-                                text: task;
+                    VerticalBox {
+                        taskAddition {
+                            addedTask(task_name) => {
+                                // Update myTask property with the new task name
+                        current-task(task_name);
                             }
+                        }
+                    }
 
-                            Button {
-                                text: "remove";
-                                clicked => {
+                    VerticalBox {
+                        Text {
+                            text: "Tasks";
+                            font-size: 2rem;
+                        }
+
+                        ListView {
+                            for task[idx] in collected-tasks: Rectangle {
+                                HorizontalLayout {
+                                    padding-bottom: 1rem;
+                                    HorizontalBox {
+                                        LineEdit {
+                                            text: task;
+                                        }
+
+                                        Button {
+                                            text: "remove";
+                                            clicked => {
+                                                remove-task(idx);
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
