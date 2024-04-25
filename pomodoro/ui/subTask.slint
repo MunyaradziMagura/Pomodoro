@@ -1,0 +1,20 @@
+import { VerticalBox, HorizontalBox, LineEdit, Button } from "std-widgets.slint";
+export component subTask inherits Rectangle {
+    min-width: 300px;
+    background: red;
+    VerticalBox {
+        HorizontalBox {
+            subTaskName := LineEdit {
+                height: 10%;
+                placeholder-text: "Sub Task";
+            }
+
+            duration := LineEdit {
+                width: 10%;
+                height: 30%;
+                placeholder-text: "1";
+                text: 1;
+            }
+        }
+    }
+}
