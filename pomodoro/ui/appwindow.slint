@@ -1,8 +1,10 @@
-import { Button, VerticalBox, ListView, HorizontalBox } from "std-widgets.slint";
+import { Button, VerticalBox, ListView, HorizontalBox, LineEdit } from "std-widgets.slint";
 import {taskAddition} from "./taskAddition.slint";
 import {subTask} from "./subTask.slint";
 import {taskVisualiser} from "./TaskVisualiser.slint";
 export component AppWindow inherits Window {
+    min-width: 800px;
+    min-height: 500px;
     in-out property <string> myTask: "here";
     //    in-out property <[{text: string}]> collected-tasks:[{ text: "working on rust" }, { text: "doing some home work" }];
 in-out property <[string]> collected-tasks:["working on rust", "doing some home work"];
@@ -21,8 +23,20 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
         VerticalBox {
             ListView {
                 for task in collected-tasks: Rectangle {
-                    Text {
-                        text: task;
+                    background: gray;
+                    HorizontalLayout {
+                        padding-bottom: 1rem;
+                        HorizontalBox {
+                            LineEdit {
+                                text: task;
+                            }
+
+                            Button {
+                                text: "remove";
+                                clicked => {
+                                }
+                            }
+                        }
                     }
                 }
             }
