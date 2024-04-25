@@ -4,7 +4,8 @@ import {subTask} from "./subTask.slint";
 import {taskVisualiser} from "./TaskVisualiser.slint";
 export component AppWindow inherits Window {
     in-out property <string> myTask: "here";
-    in-out property <[{text: string}]> collected-tasks:[{ text: "working on rust" }, { text: "doing some home work" }];
+    //    in-out property <[{text: string}]> collected-tasks:[{ text: "working on rust" }, { text: "doing some home work" }];
+in-out property <[string]> collected-tasks:["working on rust", "doing some home work"];
     callback request-increase-value();
     callback current-task(string);
     VerticalBox {
@@ -18,7 +19,13 @@ export component AppWindow inherits Window {
         }
 
         VerticalBox {
-            ListView { }
+            ListView {
+                for task in collected-tasks: Rectangle {
+                    Text {
+                        text: task;
+                    }
+                }
+            }
         }
     }
 }
