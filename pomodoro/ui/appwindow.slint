@@ -12,20 +12,50 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
     callback request-increase-value();
     callback current-task(string);
     callback remove-task(int);
-    // CODE FOR THE PONODORO
     GridLayout {
-        spacing: 1rem;
+        spacing: 0.2rem;
         Row {
+            // CODE FOR THE PONODORO
             Rectangle {
                 background: red;
                 min-width: (root.width / 3) * 2;
+                VerticalLayout {
+                    HorizontalLayout {
+                        vertical-stretch: 2;
+                        alignment: stretch;
+                        Rectangle {
+                            background: red;
+                        }
+                    }
+
+                    HorizontalLayout {
+                        alignment: stretch;
+                        vertical-stretch: 9;
+                        Rectangle {
+                            background: green;
+                            time := LineEdit {
+                                font-size: 20rem;
+                                placeholder-text: "20:15";
+                            }
+                        }
+                    }
+
+                    HorizontalLayout {
+                        alignment: stretch;
+                        vertical-stretch: 1;
+                        Rectangle {
+                            background: blue;
+                        }
+                    }
+                }
             }
+
+            // CODE FOR THE TASK MANU
 
             Rectangle {
                 background: blue;
                 min-width: (root.width / 3);
-                // CODE FOR THE TASK
-        VerticalBox {
+                VerticalBox {
                     VerticalBox {
                         taskAddition {
                             addedTask(task_name) => {
