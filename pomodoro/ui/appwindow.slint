@@ -12,7 +12,7 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
     callback request-increase-value();
     callback current-task(string);
     callback remove-task(int);
-    callback timer-state(bool);
+    callback timer-state(string);
     GridLayout {
         spacing: 0.2rem;
         Row {
@@ -26,14 +26,42 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
                         vertical-stretch: 2;
                         alignment: stretch;
                         Rectangle {
-                            background: red;
-                            Button {
-                                checkable: true;
-                                text: self.checked ? "ON" : "OFF";
-                                clicked => {
-                                    self.checked ? timer-state(true) : timer-state(false);
+                            background: green;
+                            horizontal-stretch: 1;
+                            // STORES THE BUTTONS FOR RESET, PAUSE AND START
+                        HorizontalBox {
+                                min-width: 20px;
+                                Rectangle {
+                                    // button to start and stop the timer
+                            pause := Button {
+                                        width: parent.width;
+                                        height: parent.height;
+                                        checkable: true;
+                                        text: self.checked ? "ON" : "OFF";
+                                        clicked => {
+                                            self.checked ? timer-state("start") : timer-state("stop");
+                                        }
+                                    }
+                                }
+
+                                Rectangle {
+                                    Button {
+                                        width: parent.width;
+                                        height: parent.height;
+                                        text: "reset";
+                                        clicked => {
+                                            pause.accessible-checked;
+                                            timer-state("reset")
+                                        }
+                                    }
                                 }
                             }
+                        }
+
+                        // counter for the work, short break and long break
+                        Rectangle {
+                            horizontal-stretch: 2;
+                            background: orange;
                         }
                     }
 

@@ -47,19 +47,19 @@ ui.set_collected_tasks(the_model_rc);
     //     println!("Stopped");
 
     // });
-    ui.on_timer_state(move |state| {
-        if(state==true){
+    ui.on_timer_state(move |string| {
+        if string=="start" {
             timer.start(TimerMode::Repeated, std::time::Duration::from_millis(1000), move || {                
                 seconds += 1;
-                if (seconds >= 60){
+                if seconds >= 60 {
                     minutes += 1;
                     seconds = 0;
                 }
-                if (minutes >= 60){
+                if minutes >= 60{
                     hours += 1;
                     minutes = 0;
                 } 
-                if (hours >= 60){
+                if hours >= 60{
                     seconds = 0;
                     minutes = 0;
                     hours = 0;
@@ -68,8 +68,18 @@ ui.set_collected_tasks(the_model_rc);
                 println!("Hours: {}, Minutes: {}, Seconds: {}", hours, minutes, seconds);
                 
                 });
+        }else if string=="reset" {
+            println!("Hours:");
+            seconds = 0;
+            minutes = 0;
+            hours = 0;
+            
+            println!("reset pressed-- Hours: {}, Minutes: {}, Seconds: {}", hours, minutes, seconds);
+
+            timer.restart();
+            timer.restart();
         }else{
-            timer.stop()
+            timer.stop();
         }
         
     });
