@@ -10,7 +10,7 @@ export component AppWindow inherits Window {
     //    in-out property <[{text: string}]> collected-tasks:[{ text: "working on rust" }, { text: "doing some home work" }];
 in-out property <[string]> collected-tasks:["working on rust", "doing some home work"];
     in property <string> current-timer-state;
-    in-out property <string> my-time: "25:00";
+    in-out property <string> my-time: "00:00:00";
     callback request-increase-value();
     callback current-task(string);
     callback remove-task(int);
@@ -83,7 +83,7 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
                                 x: (parent.width - self.width) / 2;
                                 y: (parent.height - self.height) / 2;
                                 width: 90%;
-                                font-size: 15rem;
+                                font-size: 12rem;
                                 text: my-time;
                             }
                         }

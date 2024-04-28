@@ -1,4 +1,4 @@
-use std::{rc::Rc, time::Duration};
+use std::{rc::Rc};
 
 use slint::{ModelRc, Timer, TimerMode, VecModel};
 
@@ -64,7 +64,7 @@ let handle_weak = ui.as_weak();
                 } 
                 //let time_result = format!("Hours: {}, Minutes: {}, Seconds: {}", 0, 0, 0);
 
-                let time_result = format!("{}:{}:{}",  hours, minutes, seconds);
+                let time_result = format!("{:02}:{:02}:{:02}", hours, minutes, seconds);
                 handle_copy.unwrap().set_my_time(time_result.trim().to_string().into());
                 println!("Hours: {}, Minutes: {}, Seconds: {}", hours, minutes, seconds);
                 
