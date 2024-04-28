@@ -9,6 +9,7 @@ export component AppWindow inherits Window {
     in-out property <int> counter: 0;
     //    in-out property <[{text: string}]> collected-tasks:[{ text: "working on rust" }, { text: "doing some home work" }];
 in-out property <[string]> collected-tasks:["working on rust", "doing some home work"];
+    in property <string> current-timer-state;
     callback request-increase-value();
     callback current-task(string);
     callback remove-task(int);
@@ -50,8 +51,13 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
                                         height: parent.height;
                                         text: "reset";
                                         clicked => {
-                                            pause.accessible-checked;
-                                            timer-state("reset")
+                                            if (pause.checked == true) {
+                                                timer-state("stop");
+                                                timer-state("reset");
+                                            } else {
+                                                pause.checked = true;
+                                                timer-state("start")
+                                            }
                                         }
                                     }
                                 }
