@@ -40,12 +40,12 @@ let cloned_model_for_remove = the_model.clone(); // Clone for use inside the rem
 
         
     
-
+let handle_weak = ui.as_weak();
  // code to handle the timer
  ui.on_timer_state(move |string| {
-    
 
         if string=="start" {
+            let handle_copy = handle_weak.clone();
             timer.start(TimerMode::Repeated, std::time::Duration::from_millis(1000), move || {                
                 seconds += 1;
                 
@@ -62,8 +62,10 @@ let cloned_model_for_remove = the_model.clone(); // Clone for use inside the rem
                     minutes = 0;
                     hours = 0;
                 } 
-                // let time_result = format!("Hours: {}, Minutes: {}, Seconds: {}", 0, 0, 0);
-                // ui.set_current_timer_state(time_result.into());
+                //let time_result = format!("Hours: {}, Minutes: {}, Seconds: {}", 0, 0, 0);
+
+                let time_result = format!("{}:{}:{}",  hours, minutes, seconds);
+                handle_copy.unwrap().set_my_time(time_result.trim().to_string().into());
                 println!("Hours: {}, Minutes: {}, Seconds: {}", hours, minutes, seconds);
                 
                 
