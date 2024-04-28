@@ -20,7 +20,7 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
         Row {
             // CODE FOR THE PONODORO
             Rectangle {
-                background: red;
+                background: whitesmoke;
                 min-width: (root.width / 3) * 2;
                 VerticalLayout {
                     // THIS IS THE CODE FOR THE BUTTONS OF THE CLOCK
@@ -28,7 +28,7 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
                         vertical-stretch: 2;
                         alignment: stretch;
                         Rectangle {
-                            background: green;
+                            background: whitesmoke;
                             horizontal-stretch: 1;
                             // STORES THE BUTTONS FOR RESET, PAUSE AND START
                         HorizontalBox {
@@ -50,7 +50,7 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
                                     Button {
                                         width: parent.width;
                                         height: parent.height;
-                                        text: "reset";
+                                        text: "RESET";
                                         clicked => {
                                             timer-state("stop");
                                             pause.checked = true;
@@ -70,7 +70,86 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
                         // counter for the work, short break and long break
                         Rectangle {
                             horizontal-stretch: 2;
-                            background: orange;
+                            background: whitesmoke;
+                            HorizontalBox {
+                                short-rest := Rectangle {
+                                    border-radius: 15px;
+                                    background: white;
+                                    Text {
+                                        x: (parent.width - self.width) / 2;
+                                        y: (parent.height - self.height) / 2;
+                                        text: "short-rest";
+                                    }
+
+                                    short-rest-hover := TouchArea {
+                                        clicked => {
+                                            active = !active;
+                                        }
+                                    }
+
+                                    property <bool> active: true;
+                                    states [
+                                        active when !short-rest-hover.has-hover: {
+                                            background: white;
+                                        }
+                                        active-hover when active && short-rest-hover.has-hover: {
+                                            background: blue;
+                                        }
+                                    ]
+                                }
+
+                                working := Rectangle {
+                                    border-radius: 15px;
+                                    background: white;
+                                    Text {
+                                        x: (parent.width - self.width) / 2;
+                                        y: (parent.height - self.height) / 2;
+                                        text: "working";
+                                    }
+
+                                    working-hover := TouchArea {
+                                        clicked => {
+                                            active = !active;
+                                        }
+                                    }
+
+                                    property <bool> active: true;
+                                    states [
+                                        active when !working-hover.has-hover: {
+                                            background: white;
+                                        }
+                                        active-hover when active && working-hover.has-hover: {
+                                            background: blue;
+                                        }
+                                    ]
+                                }
+
+                                long-rest := Rectangle {
+                                    border-radius: 15px;
+                                    background: white;
+                                    Text {
+                                        x: (parent.width - self.width) / 2;
+                                        y: (parent.height - self.height) / 2;
+                                        text: "long-rest";
+                                    }
+
+                                    long-rest-hover := TouchArea {
+                                        clicked => {
+                                            active = !active;
+                                        }
+                                    }
+
+                                    property <bool> active: true;
+                                    states [
+                                        active when !long-rest-hover.has-hover: {
+                                            background: white;
+                                        }
+                                        active-hover when active && long-rest-hover.has-hover: {
+                                            background: blue;
+                                        }
+                                    ]
+                                }
+                            }
                         }
                     }
 
