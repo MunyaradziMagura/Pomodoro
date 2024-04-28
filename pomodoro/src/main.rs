@@ -68,7 +68,6 @@ let handle_weak = ui.as_weak();
                 handle_copy.unwrap().set_my_time(time_result.trim().to_string().into());
                 println!("Hours: {}, Minutes: {}, Seconds: {}", hours, minutes, seconds);
                 
-                
                 });
         }else if string=="reset" {
             println!("Hours:");
