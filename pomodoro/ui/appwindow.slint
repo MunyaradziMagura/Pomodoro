@@ -52,13 +52,15 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
                                         height: parent.height;
                                         text: "reset";
                                         clicked => {
-                                            if (pause.checked == true) {
-                                                timer-state("stop");
-                                                timer-state("reset");
-                                            } else {
-                                                pause.checked = true;
-                                                timer-state("start")
-                                            }
+                                            timer-state("stop");
+                                            pause.checked = true;
+                                            timer-state("start")// if (pause.checked == true) {
+                                            //     timer-state("stop");
+                                            //     timer-state("reset");
+                                            // } else {
+                                            //     pause.checked = true;
+                                            //     timer-state("start")
+                                            // }
                                         }
                                     }
                                 }
@@ -78,6 +80,8 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
                         vertical-stretch: 9;
                         Rectangle {
                             Text {
+                                x: (parent.width - self.width) / 2;
+                                y: (parent.height - self.height) / 2;
                                 width: 90%;
                                 font-size: 15rem;
                                 text: my-time;
