@@ -2,6 +2,7 @@ import { Button, VerticalBox, ListView, HorizontalBox, LineEdit } from "std-widg
 import {taskAddition} from "./taskAddition.slint";
 import {subTask} from "./subTask.slint";
 import {taskVisualiser} from "./TaskVisualiser.slint";
+import { pomodoroState } from "pomodoroState.slint";
 export component AppWindow inherits Window {
     min-width: 1000px;
     min-height: 500px;
@@ -68,89 +69,7 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
                         }
 
                         // counter for the work, short break and long break
-                        Rectangle {
-                            horizontal-stretch: 2;
-                            background: whitesmoke;
-                            HorizontalBox {
-                                short-rest := Rectangle {
-                                    border-radius: 15px;
-                                    background: white;
-                                    Text {
-                                        x: (parent.width - self.width) / 2;
-                                        y: (parent.height - self.height) / 2;
-                                        text: "short-rest";
-                                    }
-
-                                    short-rest-hover := TouchArea {
-                                        clicked => {
-                                            active = !active;
-                                        }
-                                    }
-
-                                    property <bool> active: true;
-                                    states [
-                                        active when !short-rest-hover.has-hover: {
-                                            background: white;
-                                        }
-                                        active-hover when active && short-rest-hover.has-hover: {
-                                            background: blue;
-                                        }
-                                    ]
-                                }
-
-                                working := Rectangle {
-                                    border-radius: 15px;
-                                    background: white;
-                                    Text {
-                                        x: (parent.width - self.width) / 2;
-                                        y: (parent.height - self.height) / 2;
-                                        text: "working";
-                                    }
-
-                                    working-hover := TouchArea {
-                                        clicked => {
-                                            active = !active;
-                                        }
-                                    }
-
-                                    property <bool> active: true;
-                                    states [
-                                        active when !working-hover.has-hover: {
-                                            background: white;
-                                        }
-                                        active-hover when active && working-hover.has-hover: {
-                                            background: blue;
-                                        }
-                                    ]
-                                }
-
-                                long-rest := Rectangle {
-                                    border-radius: 15px;
-                                    background: white;
-                                    Text {
-                                        x: (parent.width - self.width) / 2;
-                                        y: (parent.height - self.height) / 2;
-                                        text: "long-rest";
-                                    }
-
-                                    long-rest-hover := TouchArea {
-                                        clicked => {
-                                            active = !active;
-                                        }
-                                    }
-
-                                    property <bool> active: true;
-                                    states [
-                                        active when !long-rest-hover.has-hover: {
-                                            background: white;
-                                        }
-                                        active-hover when active && long-rest-hover.has-hover: {
-                                            background: blue;
-                                        }
-                                    ]
-                                }
-                            }
-                        }
+                        pomodoroState { }
                     }
 
                     // THIS IS THE CODE FOR THE CLOCK
