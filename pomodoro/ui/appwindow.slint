@@ -75,7 +75,7 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
                     // THIS IS THE CODE FOR THE CLOCK
                     HorizontalLayout {
                         alignment: stretch;
-                        vertical-stretch: 9;
+                        vertical-stretch: 8;
                         Rectangle {
                             Text {
                                 x: (parent.width - self.width) / 2;
@@ -90,9 +90,33 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
                     // THIS IS THE CODE FOR BOTTOM OF THE SCREEN
                     HorizontalLayout {
                         alignment: stretch;
-                        vertical-stretch: 1;
-                        Rectangle {
-                            background: blue;
+                        vertical-stretch: 2;
+                        HorizontalBox {
+                            Rectangle {
+                                vertical-stretch: 2;
+                                background: yellow;
+                            }
+
+                            Text {
+                                vertical-stretch: 1;
+                                text: "hello world";
+                            }
+                        }
+
+                        HorizontalBox {
+                            VerticalBox {
+                                Rectangle {
+                                    vertical-stretch: 2;
+                                    background: yellow;
+                                }
+                            }
+
+                            VerticalBox {
+                                Text {
+                                    vertical-stretch: 1;
+                                    text: "aa";
+                                }
+                            }
                         }
                     }
                 }
