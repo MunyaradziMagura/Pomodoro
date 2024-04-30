@@ -1,4 +1,4 @@
-import { Button, VerticalBox, ListView, HorizontalBox, LineEdit } from "std-widgets.slint";
+import { Button, VerticalBox, ListView, HorizontalBox, LineEdit, ScrollView } from "std-widgets.slint";
 import {taskAddition} from "./taskAddition.slint";
 import {subTask} from "./subTask.slint";
 import {taskVisualiser} from "./TaskVisualiser.slint";
@@ -90,31 +90,107 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
                     // THIS IS THE CODE FOR BOTTOM OF THE SCREEN
                     HorizontalLayout {
                         alignment: stretch;
-                        vertical-stretch: 2;
-                        HorizontalBox {
-                            Rectangle {
-                                vertical-stretch: 2;
-                                background: yellow;
-                            }
+                        vertical-stretch: 0.5;
+                        ScrollView {
+                            width: (root.width / 3) * 2;
+                            viewport-width: 800px * 2;
+                            HorizontalLayout {
+                                spacing: 5px;
+                                HorizontalBox {
+                                    width: (root.width / 3);
+                                    spacing: 5px;
+                                    Rectangle {
+                                        border-radius: 15px;
+                                        background: whitesmoke;
+                                        border-color: lightblue;
+                                        Text {
+                                            text: "15min";
+                                        }
+                                    }
 
-                            Text {
-                                vertical-stretch: 1;
-                                text: "hello world";
-                            }
-                        }
+                                    Rectangle {
+                                        border-radius: 15px;
+                                        background: whitesmoke;
+                                        border-color: lightblue;
+                                        Text {
+                                            text: "25min";
+                                        }
+                                    }
 
-                        HorizontalBox {
-                            VerticalBox {
-                                Rectangle {
-                                    vertical-stretch: 2;
-                                    background: yellow;
+                                    Rectangle {
+                                        border-radius: 15px;
+                                        background: whitesmoke;
+                                        border-color: lightblue;
+                                        Text {
+                                            text: "35min";
+                                        }
+                                    }
+
+                                    Rectangle {
+                                        border-radius: 15px;
+                                        background: greenyellow;
+                                        border-color: lightblue;
+                                        Text {
+                                            text: "45min";
+                                        }
+                                    }
+
+                                    Rectangle {
+                                        border-radius: 15px;
+                                        background: whitesmoke;
+                                        Text {
+                                            text: "55min";
+                                        }
+                                    }
                                 }
-                            }
 
-                            VerticalBox {
-                                Text {
-                                    vertical-stretch: 1;
-                                    text: "aa";
+                                // number of sessions
+                                HorizontalBox {
+                                    width: (root.width / 3);
+                                    spacing: 5px;
+                                    Rectangle {
+                                        border-radius: 15px;
+                                        background: whitesmoke;
+                                        border-color: lightblue;
+                                        Text {
+                                            text: "Sessions";
+                                        }
+                                    }
+
+                                    Rectangle {
+                                        border-radius: 15px;
+                                        background: whitesmoke;
+                                        border-color: lightblue;
+                                        Text {
+                                            text: "1";
+                                        }
+                                    }
+
+                                    Rectangle {
+                                        border-radius: 15px;
+                                        background: whitesmoke;
+                                        border-color: lightblue;
+                                        Text {
+                                            text: "2";
+                                        }
+                                    }
+
+                                    Rectangle {
+                                        border-radius: 15px;
+                                        background: greenyellow;
+                                        border-color: lightblue;
+                                        Text {
+                                            text: "3";
+                                        }
+                                    }
+
+                                    Rectangle {
+                                        border-radius: 15px;
+                                        background: whitesmoke;
+                                        Text {
+                                            text: "4";
+                                        }
+                                    }
                                 }
                             }
                         }
