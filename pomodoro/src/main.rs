@@ -1,4 +1,4 @@
-use std::rc::Rc;
+use std::{rc::Rc, time::Duration};
 
 use slint::{ModelRc, Timer, TimerMode, VecModel};
 
@@ -42,35 +42,42 @@ fn main() -> Result<(), slint::PlatformError> {
     ui.on_timer_state(move |string| {
         if string == "start" {
             let handle_copy = handle_weak.clone();
+            let mut remaining_time = Duration::from_secs(5);
+            let mut hours = 0;
+            let mut minutes = 0;
+            let mut seconds = 0;
+            let aaa = true;
+
             timer.start(
                 TimerMode::Repeated,
                 std::time::Duration::from_millis(1000),
                 move || {
-                    seconds += 1;
+                    // flag for capturing when the timer should stop
+                    if std::cmp::min(remaining_time.as_secs(), 2) > 0 {
+                        hours = remaining_time.as_secs() / 3600;
+                        minutes = (remaining_time.as_secs() % 3600) / 60;
+                        seconds = remaining_time.as_secs() % 60;
 
-                    if seconds >= 60 {
-                        minutes += 1;
-                        seconds = 0;
-                    }
-                    if minutes >= 60 {
-                        hours += 1;
-                        minutes = 0;
-                    }
-                    if hours >= 60 {
-                        seconds = 0;
-                        minutes = 0;
-                        hours = 0;
-                    }
-                    //let time_result = format!("Hours: {}, Minutes: {}, Seconds: {}", 0, 0, 0);
+                        remaining_time -= Duration::from_secs(1);
 
-                    let time_result = format!("{:02}:{:02}:{:02}", hours, minutes, seconds);
-                    handle_copy
-                        .unwrap()
-                        .set_my_time(time_result.trim().to_string().into());
-                    println!(
-                        "Hours: {}, Minutes: {}, Seconds: {}",
-                        hours, minutes, seconds
-                    );
+                        //let time_result = format!("Hours: {}, Minutes: {}, Seconds: {}", 0, 0, 0);
+
+                        let time_result = format!("{:02}:{:02}:{:02}", hours, minutes, seconds);
+                        handle_copy
+                            .unwrap()
+                            .set_my_time(time_result.trim().to_string().into());
+                        println!(
+                            "Hours: {}, Minutes: {}, Seconds: {}",
+                            hours, minutes, seconds
+                        );
+                        // timer complete
+                    } else {
+                        println!("timer complete");
+                        let time_result = format!("{:02}:{:02}:{:02}", 0, 0, 0);
+                        handle_copy
+                            .unwrap()
+                            .set_my_time(time_result.trim().to_string().into());
+                    }
                 },
             );
         } else if string == "reset" {
