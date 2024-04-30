@@ -42,18 +42,17 @@ fn main() -> Result<(), slint::PlatformError> {
     ui.on_timer_state(move |string| {
         if string == "start" {
             let handle_copy = handle_weak.clone();
-            let mut remaining_time = Duration::from_secs(5);
+            let mut remaining_time = Duration::from_secs(1 * 60);
             let mut hours = 0;
             let mut minutes = 0;
             let mut seconds = 0;
-            let aaa = true;
 
             timer.start(
                 TimerMode::Repeated,
                 std::time::Duration::from_millis(1000),
                 move || {
                     // flag for capturing when the timer should stop
-                    if std::cmp::min(remaining_time.as_secs(), 2) > 0 {
+                    if std::cmp::min(remaining_time.as_secs(), 2) >= 0 {
                         hours = remaining_time.as_secs() / 3600;
                         minutes = (remaining_time.as_secs() % 3600) / 60;
                         seconds = remaining_time.as_secs() % 60;
@@ -72,20 +71,16 @@ fn main() -> Result<(), slint::PlatformError> {
                         );
                         // timer complete
                     } else {
-                        println!("timer complete");
-                        let time_result = format!("{:02}:{:02}:{:02}", 0, 0, 0);
-                        handle_copy
-                            .unwrap()
-                            .set_my_time(time_result.trim().to_string().into());
+                        handle_copy.unwrap().set_my_time(
+                            format!("{:02}:{:02}:{:02}", 0, 0, 0)
+                                .trim()
+                                .to_string()
+                                .into(),
+                        );
                     }
                 },
             );
         } else if string == "reset" {
-            println!("Hours:");
-            seconds = 0;
-            minutes = 0;
-            hours = 0;
-
             println!(
                 "reset pressed-- Hours: {}, Minutes: {}, Seconds: {}",
                 hours, minutes, seconds
