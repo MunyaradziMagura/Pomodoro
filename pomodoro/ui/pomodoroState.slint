@@ -1,4 +1,4 @@
-import { HorizontalBox } from "std-widgets.slint";
+import { HorizontalBox, VerticalBox } from "std-widgets.slint";
 export component pomodoroState inherits Rectangle {
     horizontal-stretch: 2;
     background: whitesmoke;
@@ -6,10 +6,24 @@ export component pomodoroState inherits Rectangle {
         short-rest := Rectangle {
             border-radius: 15px;
             background: white;
-            Text {
-                x: (parent.width - self.width) / 2;
-                y: (parent.height - self.height) / 2;
-                text: "short-rest";
+            horizontal-stretch: 1;
+            VerticalLayout {
+                vertical-stretch: 1;
+                Rectangle {
+                    Text {
+                        font-size: 2rem;
+                        text: "BREAK";
+                    }
+                }
+
+                Rectangle {
+                    Text {
+                        x: (parent.width - self.width) / 2;
+                        y: (parent.height - self.height) / 2;
+                        font-size: 6rem;
+                        text: "0";
+                    }
+                }
             }
 
             short-rest-hover := TouchArea {
@@ -32,10 +46,24 @@ export component pomodoroState inherits Rectangle {
         working := Rectangle {
             border-radius: 15px;
             background: white;
-            Text {
-                x: (parent.width - self.width) / 2;
-                y: (parent.height - self.height) / 2;
-                text: "working";
+            horizontal-stretch: 1;
+            VerticalLayout {
+                vertical-stretch: 1;
+                Rectangle {
+                    Text {
+                        font-size: 2rem;
+                        text: "WORK";
+                    }
+                }
+
+                Rectangle {
+                    Text {
+                        x: (parent.width - self.width) / 2;
+                        y: (parent.height - self.height) / 2;
+                        font-size: 6rem;
+                        text: "0";
+                    }
+                }
             }
 
             working-hover := TouchArea {
@@ -58,10 +86,24 @@ export component pomodoroState inherits Rectangle {
         long-rest := Rectangle {
             border-radius: 15px;
             background: white;
-            Text {
-                x: (parent.width - self.width) / 2;
-                y: (parent.height - self.height) / 2;
-                text: "long-rest";
+            horizontal-stretch: 1;
+            VerticalLayout {
+                vertical-stretch: 1;
+                Rectangle {
+                    Text {
+                        font-size: 2rem;
+                        text: "REST";
+                    }
+                }
+
+                Rectangle {
+                    Text {
+                        x: (parent.width - self.width) / 2;
+                        y: (parent.height - self.height) / 2;
+                        font-size: 6rem;
+                        text: "0";
+                    }
+                }
             }
 
             long-rest-hover := TouchArea {
