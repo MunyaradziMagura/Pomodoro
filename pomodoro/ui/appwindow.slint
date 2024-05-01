@@ -103,6 +103,7 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
                                 sessionLength {
                                     selectLength(length) => {
                                         session-length-timer = length;
+                                        pause.checked = true;
                                         timer-state("start",session-length-timer);
                                     }
                                 }
