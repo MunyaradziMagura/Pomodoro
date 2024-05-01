@@ -100,7 +100,12 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
                             HorizontalLayout {
                                 spacing: 5px;
                                 // session length component 
-                                sessionLength { }
+                                sessionLength {
+                                    selectLength(length) => {
+                                        session-length-timer = length;
+                                        timer-state("start",session-length-timer);
+                                    }
+                                }
 
                                 // number of sessions
                                 numberOfSession { }
