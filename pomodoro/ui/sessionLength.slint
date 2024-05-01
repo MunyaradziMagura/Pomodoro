@@ -2,8 +2,8 @@ import { HorizontalBox } from "std-widgets.slint";
 export component sessionLength inherits HorizontalBox {
     min-width: 250px;
     spacing: 5px;
+    in-out property <int> selected-length-time:15;
     callback selectLength(int);
-    in-out property <[int]> collected-tasks:[15, 25, 35, 45, 55];
     Rectangle {
         border-radius: 15px;
         background: whitesmoke;
@@ -21,11 +21,21 @@ export component sessionLength inherits HorizontalBox {
             text: "15min";
         }
 
-        TouchArea {
+        fifteen := TouchArea {
             clicked => {
-                root.selectLength(15);
+                selected-length-time = 15;
+                root.selectLength(selected-length-time);
             }
         }
+
+        states [
+            active-hover when fifteen.has-hover: {
+                background: orange;
+            }
+            active when selected-length-time == 15: {
+                background: yellow;
+            }
+        ]
     }
 
     Rectangle {
@@ -36,11 +46,22 @@ export component sessionLength inherits HorizontalBox {
             text: "25min";
         }
 
-        TouchArea {
+        twenty-five := TouchArea {
             clicked => {
-                root.selectLength(25);
+                selected-length-time = 25;
+                root.selectLength(selected-length-time);
             }
         }
+
+        states [
+            active-hover when twenty-five.has-hover: {
+                background: orange;
+            }
+            active when selected-length-time == 25: {
+                background: yellow;
+                border-radius: 90px;
+            }
+        ]
     }
 
     Rectangle {
@@ -51,26 +72,47 @@ export component sessionLength inherits HorizontalBox {
             text: "35min";
         }
 
-        TouchArea {
+        thirty-five := TouchArea {
             clicked => {
-                root.selectLength(35);
+                selected-length-time = 35;
+                root.selectLength(selected-length-time);
             }
         }
+
+        states [
+            active-hover when thirty-five.has-hover: {
+                background: orange;
+            }
+            active when selected-length-time == 35: {
+                background: yellow;
+                border-radius: 90px;
+            }
+        ]
     }
 
     Rectangle {
         border-radius: 15px;
-        background: greenyellow;
         border-color: lightblue;
         Text {
             text: "45min";
         }
 
-        TouchArea {
+        fourty-five := TouchArea {
             clicked => {
-                root.selectLength(45);
+                selected-length-time = 45;
+                root.selectLength(selected-length-time);
             }
         }
+
+        states [
+            active-hover when fourty-five.has-hover: {
+                background: orange;
+            }
+            active when selected-length-time == 45: {
+                background: yellow;
+                border-radius: 90px;
+            }
+        ]
     }
 
     Rectangle {
@@ -80,10 +122,21 @@ export component sessionLength inherits HorizontalBox {
             text: "55min";
         }
 
-        TouchArea {
+        fifty-five := TouchArea {
             clicked => {
-                root.selectLength(55);
+                selected-length-time = 55;
+                root.selectLength(selected-length-time);
             }
         }
+
+        states [
+            active-hover when fifty-five.has-hover: {
+                background: orange;
+            }
+            active when selected-length-time == 55: {
+                background: yellow;
+                border-radius: 90px;
+            }
+        ]
     }
 }
