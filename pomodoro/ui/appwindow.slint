@@ -17,7 +17,8 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
     callback request-increase-value();
     callback current-task(string);
     callback remove-task(int);
-    callback timer-state(string);
+    callback timer-state(string, int);
+    in-out property <int> session-length-timer: 25;
     GridLayout {
         spacing: 0.2rem;
         Row {
@@ -44,7 +45,7 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
                                         checkable: true;
                                         text: self.checked ? "ON" : "OFF";
                                         clicked => {
-                                            self.checked ? timer-state("start") : timer-state("stop");
+                                            self.checked ? timer-state("start",session-length-timer) : timer-state("stop",session-length-timer);
                                         }
                                     }
                                 }
@@ -55,9 +56,9 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
                                         height: parent.height;
                                         text: "RESET";
                                         clicked => {
-                                            timer-state("stop");
+                                            timer-state("stop",session-length-timer);
                                             pause.checked = true;
-                                            timer-state("start")// if (pause.checked == true) {
+                                            timer-state("start",session-length-timer)// if (pause.checked == true) {
                                             //     timer-state("stop");
                                             //     timer-state("reset");
                                             // } else {

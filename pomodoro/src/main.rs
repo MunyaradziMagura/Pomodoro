@@ -1,4 +1,8 @@
-use std::{rc::Rc, time::Duration};
+use std::{
+    borrow::{Borrow, BorrowMut},
+    rc::Rc,
+    time::Duration,
+};
 
 use slint::{ModelRc, Timer, TimerMode, VecModel};
 
@@ -39,20 +43,17 @@ fn main() -> Result<(), slint::PlatformError> {
 
     let handle_weak = ui.as_weak();
     // code to handle the timer
-    ui.on_timer_state(move |string| {
-        if string == "start" {
+    ui.on_timer_state(move |state_string, count_down| {
+        if state_string == "start" {
             let handle_copy = handle_weak.clone();
-            let mut remaining_time = Duration::from_secs(1 * 60);
-            let mut hours = 0;
-            let mut minutes = 0;
-            let mut seconds = 0;
+            let mut remaining_time = Duration::from_secs((count_down * 60).try_into().unwrap());
 
             timer.start(
                 TimerMode::Repeated,
                 std::time::Duration::from_millis(1000),
                 move || {
                     // flag for capturing when the timer should stop
-                    if std::cmp::min(remaining_time.as_secs(), 2) >= 0 {
+                    if remaining_time.as_secs() > 0 {
                         hours = remaining_time.as_secs() / 3600;
                         minutes = (remaining_time.as_secs() % 3600) / 60;
                         seconds = remaining_time.as_secs() % 60;
@@ -80,7 +81,7 @@ fn main() -> Result<(), slint::PlatformError> {
                     }
                 },
             );
-        } else if string == "reset" {
+        } else if state_string == "reset" {
             println!(
                 "reset pressed-- Hours: {}, Minutes: {}, Seconds: {}",
                 hours, minutes, seconds
