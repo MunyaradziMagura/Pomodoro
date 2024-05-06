@@ -1,23 +1,2 @@
 import { HorizontalBox, VerticalBox } from "std-widgets.slint";
-export component pomodoroState inherits Rectangle {
-    horizontal-stretch: 2;
-    in property <string> current-pomodoro-state: "pomodoro";
-    // long break, short break, working
-    HorizontalBox {
-        short-rest := Rectangle {
-            background: lightgray;
-            border-color: #027f80;
-            border-width: 0.5rem;
-            border-radius: 5px;
-            horizontal-stretch: 1;
-            Rectangle {
-                Text {
-                    x: (parent.width - self.width) / 2;
-                    y: (parent.height - self.height) / 2;
-                    font-size: 6rem;
-                    text: current-pomodoro-state;
-                }
-            }
-        }
-    }
-}
+export component pomodoroState inherits Rectangle { }

@@ -80,21 +80,40 @@ fn main() -> Result<(), slint::PlatformError> {
                         //     "Hours: {}, Minutes: {}, Seconds: {}",
                         //     hours, minutes, seconds
                         // );
-
+                        // track when the user should work and when they should rest
                         if minutes != prev_minutes {
                             prev_minutes = minutes;
                             if working > 0 {
                                 // user is working
+                                let working_time_result = format!("Rest in {} min", working);
+
+                                // current-pomodoro-state
+                                handle_copy.unwrap().set_current_pomodoro_state(
+                                    working_time_result.trim().to_string().into(),
+                                );
                                 working = working - 1;
+
                                 println!("WORKING")
                             } else if working <= 0 && resting >= 1 {
                                 // user is resting
+                                let resting_time_result = format!("Working in {} min", resting);
+
+                                handle_copy.unwrap().set_current_pomodoro_state(
+                                    resting_time_result.trim().to_string().into(),
+                                );
                                 resting = resting - 1;
+
                                 println!("RESTING")
                             } else {
                                 // reset working and resting
-                                working = 24;
+                                working = 25;
                                 resting = 5;
+                                let working_time_result = format!("Rest in {} min", working);
+
+                                // current-pomodoro-state
+                                handle_copy.unwrap().set_current_pomodoro_state(
+                                    working_time_result.trim().to_string().into(),
+                                );
                             }
                         }
                     } else {
@@ -104,6 +123,9 @@ fn main() -> Result<(), slint::PlatformError> {
                                 .to_string()
                                 .into(),
                         );
+                        handle_copy
+                            .unwrap()
+                            .set_current_pomodoro_state("Complete!!".trim().to_string().into());
                     }
                 },
             );

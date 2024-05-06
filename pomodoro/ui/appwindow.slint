@@ -14,6 +14,7 @@ export component AppWindow inherits Window {
 in-out property <[string]> collected-tasks:["working on rust", "doing some home work"];
     in property <string> current-timer-state;
     in-out property <string> my-time: "00:00:00";
+    in property <string> current-pomodoro-state:"Start Working";
     callback request-increase-value();
     callback current-task(string);
     callback remove-task(int);
@@ -72,7 +73,28 @@ in-out property <[string]> collected-tasks:["working on rust", "doing some home 
                         }
 
                         // counter for the work, short break and long break
-                        pomodoroState { }
+                        Rectangle {
+                            horizontal-stretch: 2;
+                            // long break, short break, working
+                    HorizontalBox {
+                                short-rest := Rectangle {
+                                    background: lightgray;
+                                    border-color: #027f80;
+                                    border-width: 0.5rem;
+                                    border-radius: 5px;
+                                    horizontal-stretch: 1;
+                                    Rectangle {
+                                        Text {
+                                            x: (parent.width - self.width) / 2;
+                                            y: (parent.height - self.height) / 2;
+                                            font-size: 3rem;
+                                            text: current-pomodoro-state;
+                                            // animate between the word working and the remaining time
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
 
                     // THIS IS THE CODE FOR THE CLOCK
