@@ -34,6 +34,8 @@ fn main() -> Result<(), slint::PlatformError> {
         cloned_model_for_remove.remove(idx.try_into().unwrap());
     });
 
+    // function for calculating when a user should take a break,
+
     // code to handle the timer
     // code to handle the timer
     let timer = Timer::default();
@@ -71,6 +73,8 @@ fn main() -> Result<(), slint::PlatformError> {
                             "Hours: {}, Minutes: {}, Seconds: {}",
                             hours, minutes, seconds
                         );
+                        // Determine the timer state and print the message
+
                         // timer complete
                     } else {
                         handle_copy.unwrap().set_my_time(
@@ -82,7 +86,6 @@ fn main() -> Result<(), slint::PlatformError> {
                     }
                 },
             );
-            timer.stop();
         } else if state_string == "reset" {
             println!(
                 "reset pressed-- Hours: {}, Minutes: {}, Seconds: {}",
