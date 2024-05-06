@@ -2,6 +2,7 @@ import { HorizontalBox } from "std-widgets.slint";
 export component numberOfSession inherits HorizontalBox {
     min-width: 250px;
     spacing: 5px;
+    in-out property <int> selected-session-number: 1;
     Rectangle {
         border-radius: 15px;
         background: whitesmoke;
@@ -14,28 +15,73 @@ export component numberOfSession inherits HorizontalBox {
     Rectangle {
         border-radius: 15px;
         background: whitesmoke;
-        border-color: lightblue;
         Text {
             text: "1";
         }
+
+        session-one := TouchArea {
+            clicked => {
+                selected-session-number = 1;
+                //root.selectLength(selected-length-time);
+            }
+        }
+
+        states [
+            active-hover when session-one.has-hover: {
+                background: #027f80;
+            }
+            active when selected-session-number == 1: {
+                background: #027f80;
+            }
+        ]
     }
 
     Rectangle {
         border-radius: 15px;
         background: whitesmoke;
-        border-color: lightblue;
         Text {
             text: "2";
         }
+
+        session-two := TouchArea {
+            clicked => {
+                selected-session-number = 2;
+                //root.selectLength(selected-length-time);
+            }
+        }
+
+        states [
+            active-hover when session-two.has-hover: {
+                background: #027f80;
+            }
+            active when selected-session-number == 2: {
+                background: #027f80;
+            }
+        ]
     }
 
     Rectangle {
         border-radius: 15px;
-        background: greenyellow;
-        border-color: lightblue;
+        background: whitesmoke;
         Text {
             text: "3";
         }
+
+        session-three := TouchArea {
+            clicked => {
+                selected-session-number = 3;
+                //root.selectLength(selected-length-time);
+            }
+        }
+
+        states [
+            active-hover when session-three.has-hover: {
+                background: #027f80;
+            }
+            active when selected-session-number == 3: {
+                background: #027f80;
+            }
+        ]
     }
 
     Rectangle {
@@ -44,6 +90,22 @@ export component numberOfSession inherits HorizontalBox {
         Text {
             text: "4";
         }
+
+        session-four := TouchArea {
+            clicked => {
+                selected-session-number = 4;
+                //root.selectLength(selected-length-time);
+            }
+        }
+
+        states [
+            active-hover when session-four.has-hover: {
+                background: #027f80;
+            }
+            active when selected-session-number == 4: {
+                background: #027f80;
+            }
+        ]
     }
 
     Rectangle {
@@ -52,5 +114,21 @@ export component numberOfSession inherits HorizontalBox {
         Text {
             text: "5";
         }
+
+        session-five := TouchArea {
+            clicked => {
+                selected-session-number = 5;
+                //root.selectLength(selected-length-time);
+            }
+        }
+
+        states [
+            active-hover when session-five.has-hover: {
+                background: #027f80;
+            }
+            active when selected-session-number == 5: {
+                background: #027f80;
+            }
+        ]
     }
 }

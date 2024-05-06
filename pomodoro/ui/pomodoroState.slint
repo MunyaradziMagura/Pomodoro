@@ -1,126 +1,23 @@
 import { HorizontalBox, VerticalBox } from "std-widgets.slint";
 export component pomodoroState inherits Rectangle {
     horizontal-stretch: 2;
-    background: whitesmoke;
+    in property <string> current-pomodoro-state: "pomodoro";
+    // long break, short break, working
     HorizontalBox {
         short-rest := Rectangle {
-            border-radius: 15px;
-            background: white;
+            background: lightgray;
+            border-color: #027f80;
+            border-width: 0.5rem;
+            border-radius: 5px;
             horizontal-stretch: 1;
-            VerticalLayout {
-                vertical-stretch: 1;
-                Rectangle {
-                    Text {
-                        font-size: 2rem;
-                        text: "BREAK";
-                    }
-                }
-
-                Rectangle {
-                    Text {
-                        x: (parent.width - self.width) / 2;
-                        y: (parent.height - self.height) / 2;
-                        font-size: 6rem;
-                        text: "0";
-                    }
+            Rectangle {
+                Text {
+                    x: (parent.width - self.width) / 2;
+                    y: (parent.height - self.height) / 2;
+                    font-size: 6rem;
+                    text: current-pomodoro-state;
                 }
             }
-
-            short-rest-hover := TouchArea {
-                clicked => {
-                    active = !active;
-                }
-            }
-
-            property <bool> active: true;
-            states [
-                active when !short-rest-hover.has-hover: {
-                    background: white;
-                }
-                active-hover when active && short-rest-hover.has-hover: {
-                    background: blue;
-                }
-            ]
-        }
-
-        working := Rectangle {
-            border-radius: 15px;
-            background: white;
-            horizontal-stretch: 1;
-            VerticalLayout {
-                vertical-stretch: 1;
-                Rectangle {
-                    Text {
-                        font-size: 2rem;
-                        text: "WORK";
-                    }
-                }
-
-                Rectangle {
-                    Text {
-                        x: (parent.width - self.width) / 2;
-                        y: (parent.height - self.height) / 2;
-                        font-size: 6rem;
-                        text: "0";
-                    }
-                }
-            }
-
-            working-hover := TouchArea {
-                clicked => {
-                    active = !active;
-                }
-            }
-
-            property <bool> active: true;
-            states [
-                active when !working-hover.has-hover: {
-                    background: white;
-                }
-                active-hover when active && working-hover.has-hover: {
-                    background: blue;
-                }
-            ]
-        }
-
-        long-rest := Rectangle {
-            border-radius: 15px;
-            background: white;
-            horizontal-stretch: 1;
-            VerticalLayout {
-                vertical-stretch: 1;
-                Rectangle {
-                    Text {
-                        font-size: 2rem;
-                        text: "REST";
-                    }
-                }
-
-                Rectangle {
-                    Text {
-                        x: (parent.width - self.width) / 2;
-                        y: (parent.height - self.height) / 2;
-                        font-size: 6rem;
-                        text: "0";
-                    }
-                }
-            }
-
-            long-rest-hover := TouchArea {
-                clicked => {
-                    active = !active;
-                }
-            }
-
-            property <bool> active: true;
-            states [
-                active when !long-rest-hover.has-hover: {
-                    background: white;
-                }
-                active-hover when active && long-rest-hover.has-hover: {
-                    background: blue;
-                }
-            ]
         }
     }
 }

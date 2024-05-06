@@ -1,5 +1,6 @@
 use std::{
     borrow::{Borrow, BorrowMut},
+    process::exit,
     rc::Rc,
     time::Duration,
 };
@@ -81,6 +82,7 @@ fn main() -> Result<(), slint::PlatformError> {
                     }
                 },
             );
+            timer.stop();
         } else if state_string == "reset" {
             println!(
                 "reset pressed-- Hours: {}, Minutes: {}, Seconds: {}",
