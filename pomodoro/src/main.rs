@@ -50,10 +50,17 @@ fn main() -> Result<(), slint::PlatformError> {
         if state_string == "start" {
             let handle_copy = handle_weak.clone();
             let mut remaining_time = Duration::from_secs((count_down * 60).try_into().unwrap());
+            // track changes in the min hand
+            let mut prev_minutes = 0;
+
+            // track when the user should take a rest
+
+            let mut working = 25;
+            let mut resting: i32 = 5;
 
             timer.start(
                 TimerMode::Repeated,
-                std::time::Duration::from_millis(1000),
+                std::time::Duration::from_millis(1),
                 move || {
                     // flag for capturing when the timer should stop
                     if remaining_time.as_secs() > 0 {
@@ -69,13 +76,27 @@ fn main() -> Result<(), slint::PlatformError> {
                         handle_copy
                             .unwrap()
                             .set_my_time(time_result.trim().to_string().into());
-                        println!(
-                            "Hours: {}, Minutes: {}, Seconds: {}",
-                            hours, minutes, seconds
-                        );
-                        // Determine the timer state and print the message
+                        // println!(
+                        //     "Hours: {}, Minutes: {}, Seconds: {}",
+                        //     hours, minutes, seconds
+                        // );
 
-                        // timer complete
+                        if minutes != prev_minutes {
+                            prev_minutes = minutes;
+                            if working > 0 {
+                                // user is working
+                                working = working - 1;
+                                println!("WORKING")
+                            } else if working <= 0 && resting >= 1 {
+                                // user is resting
+                                resting = resting - 1;
+                                println!("RESTING")
+                            } else {
+                                // reset working and resting
+                                working = 24;
+                                resting = 5;
+                            }
+                        }
                     } else {
                         handle_copy.unwrap().set_my_time(
                             format!("{:02}:{:02}:{:02}", 0, 0, 0)
