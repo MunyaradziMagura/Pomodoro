@@ -60,7 +60,7 @@ fn main() -> Result<(), slint::PlatformError> {
 
             timer.start(
                 TimerMode::Repeated,
-                std::time::Duration::from_millis(1),
+                std::time::Duration::from_millis(1000),
                 move || {
                     // flag for capturing when the timer should stop
                     if remaining_time.as_secs() > 0 {
